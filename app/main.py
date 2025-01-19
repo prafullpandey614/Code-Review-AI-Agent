@@ -14,7 +14,7 @@ class PRAnalysisRequest(BaseModel):
 
 
 @app.get("/")
-async def get_root(task_id: str):
+async def get_root():
     return {"messg": "hello There"}
 
 @app.post("/analyze-pr")
