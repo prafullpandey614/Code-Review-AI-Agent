@@ -12,6 +12,11 @@ class PRAnalysisRequest(BaseModel):
     pr_number: int
     github_token: str | None = None
 
+
+@app.get("/")
+async def get_root(task_id: str):
+    return {"messg": "hello There"}
+
 @app.post("/analyze-pr")
 async def analyze_pr(request: PRAnalysisRequest):
     task = analyze_pr_task.delay(
