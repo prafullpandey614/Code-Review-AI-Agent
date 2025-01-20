@@ -6,8 +6,8 @@ This project implements an autonomous code review agent system that utilizes AI 
 
 * **Asynchronous Processing:** 
     * Utilizes Celery for efficient task handling and improved performance.
-    * Stores task results in [**Redis**] (or PostgreSQL) for easy retrieval and persistence.
-    * Implements robust task status tracking (pending, processing, completed, failed).
+    * Stores task results in [**Redis**] for easy retrieval and persistence.
+    * Implements robust task status tracking (pending, completed, failed).
     * Handles errors gracefully with informative error messages.
 
 * **AI-Powered Code Analysis:**
@@ -16,7 +16,7 @@ This project implements an autonomous code review agent system that utilizes AI 
         * Potential bugs and errors
         * Performance improvements
         * Best practices adherence
-    * Employs an AI agent framework (e.g., langchain, crewai, litellm, autogen) for intelligent code analysis.
+    * Employs langchain for intelligent code analysis.
 
 * **FastAPI-Based API:**
     * Exposes the following endpoints:
