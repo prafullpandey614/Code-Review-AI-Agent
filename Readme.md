@@ -71,4 +71,18 @@ CELERY_BROKER_URL=redis://127.0.0.1:6379/0
 CELERY_RESULT_BACKEND=redis://127.0.0.1:6379/0
 LLM_API_KEY=your_llm_api_key (OpenAI Secret key)
 ```
+## Design document (How this Project is built ?)
 
+- This project includes 3 APIs mainly "/analyze-pr", "/status/{task_id}", "result/{task_id}"
+- When you will hit the post method on first api /analyze-pr it will invoke a celery task in background
+- this task will create an CodeReviewAgent which will analyze github PRs
+- now this CodeReviewAgent has a method analyze_pr which will fetch pr_details and files
+- and now these files will be passed through 4 Different Analyzers 
+- BugAnaylzer, StyleAnalyzer, PerformanceAnalyzer and BestPractice analyzer
+- These analyzers classes have analyze method defined in them which will parse the file content into tree using (AST- abstract syntax tree)
+- we are using this tree nodes to visit the code and check the issues or any errors
+- if any issue is found we are storing it into CodeIssue data class
+- and then we are return all the issues and their proper details in the response
+- we can fetch status of the task using "/status/{task_id}" api 
+- and we can get result of the task using "/result/{task_id}" api
+- I have broken down code into different modules, GithubClient , CodeReviewAgent, Analyzers
